@@ -58,6 +58,7 @@ const submitBooking = async (mentorId) => {
  return (
   <div className="browse-wrap">
     <h2>Find a Mentor</h2>
+    <p><a href="/my-bookings">View My Bookings →</a></p>
 
     {!selectedCollege && (
       <div className="pick-list">
@@ -90,9 +91,9 @@ const submitBooking = async (mentorId) => {
     <h3>{m.name}</h3>
     <p>{m.bio || 'No bio yet'}</p>
     <p>⭐ {m.averageRating.toFixed(1)} ({m.ratingCount} ratings)</p>
-    <p className={m.available ? 'status-available' : 'status-busy'}>
-      {m.available ? 'Available' : 'Busy'}
-    </p>
+    <span className={`badge badge-${m.available ? 'available' : 'busy'}`}>
+  {m.available ? 'Available' : 'Busy'}
+</span>
 
     {m.available && (
       bookingMentorId === m.id ? (

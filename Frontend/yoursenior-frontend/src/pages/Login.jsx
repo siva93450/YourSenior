@@ -22,7 +22,7 @@ function Login() {
       localStorage.setItem('name', res.data.name);
       localStorage.setItem('id', res.data.id);
 
-      navigate('/browse'); // we'll build this page next
+      navigate(res.data.role === 'MENTOR' ? '/mentor-dashboard' : '/browse');
     } catch (err) {
       setError('Invalid email or password');
     }

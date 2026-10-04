@@ -1,12 +1,12 @@
 # Backend
-backend/target/
-backend/.idea/
-backend/*.iml
+Backend/target/
+Backend/.idea/
+Backend/*.iml
+Backend/src/main/resources/application.properties
 
 # Frontend
-frontend/node_modules/
-frontend/dist/
+Frontend/yoursenior-frontend/node_modules/
+Frontend/yoursenior-frontend/dist/
 
 # General
 .DS_Store
-src/main/resources/application.properties

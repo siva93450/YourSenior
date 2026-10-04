@@ -28,14 +28,9 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> {}) // enable CORS using the bean below
-                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).
-                authorizeHttpRequests(auth -> auth
-                        .requestMatchers(
-                                "/api/users/register", "/api/users/login",
-                                "/api/mentors/register", "/api/mentors/login",
-                                "/api/mentors/**"   // browsing/search is public — no login needed to look around
-                        ).permitAll()
-                        .anyRequest().authenticated()   // bookings, ratings, availability toggle still require login
+                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(auth -> auth
+                        .anyRequest().permitAll()   // TEMPORARY — wide open, for diagnosis only
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 

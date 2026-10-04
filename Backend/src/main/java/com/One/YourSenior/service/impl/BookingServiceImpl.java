@@ -7,6 +7,8 @@ import com.One.YourSenior.repository.UserRepository;
 import com.One.YourSenior.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.time.LocalDateTime;
+
 
 import java.util.List;
 
@@ -69,6 +71,7 @@ public class BookingServiceImpl implements BookingService {
     @Autowired
     private MentorRepository mentorRepository;
 
+
     @Override
     public Booking rateBooking(Long bookingId, int ratingValue) {
         if (ratingValue < 1 || ratingValue > 5) {
@@ -82,6 +85,11 @@ public class BookingServiceImpl implements BookingService {
         }
         if (booking.isRated()) {
             throw new RuntimeException("This booking has already been rated");
+        }
+
+        LocalDateTime sessionDateTime = LocalDateTime.of(booking.getDate(), booking.getTime());
+        if (sessionDateTime.isAfter(LocalDateTime.now())) {
+            throw new RuntimeException("You can rate this session only after it has taken place");
         }
 
         Mentor mentor = booking.getMentor();
